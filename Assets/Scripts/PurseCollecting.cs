@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PurseCollecting : MonoBehaviour
 {
+    /*
     public GameObject pursePrefab;
     
     public Transform armPos;
@@ -31,7 +32,7 @@ public class PurseCollecting : MonoBehaviour
      * kolumuzun kapasitesi 3 
      * 3 çanta yaratýnca daha fazla geri sayým ve çanta oluþturma olmasýn
      
-    */
+    
     private void Awake()
     {
         wardrobeCanvas.active = false;
@@ -74,7 +75,7 @@ public class PurseCollecting : MonoBehaviour
             playerCanvas.active = false;
         }
     }
-
+    */
     
 
 

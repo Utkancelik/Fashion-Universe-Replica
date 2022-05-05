@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ReyonScript : MonoBehaviour
 {
+    /*
     PurseCollecting purseScript;
 
     List<GameObject> reyonList = new List<GameObject>();
@@ -28,4 +29,5 @@ public class ReyonScript : MonoBehaviour
 
         }
     }
+    */
 }
