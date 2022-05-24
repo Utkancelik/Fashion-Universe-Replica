@@ -5,50 +5,7 @@ using UnityEngine.UI;
 
 public class Wardrobe : MonoBehaviour
 {
-    /*
-    [SerializeField] private GameObject urunPrefab;
-    private void OnTriggerEnter(Collider other)
-    {
-        // �anta ta��y�c�ysa
-        if (other.tag == "Carriers")
-        {
-            GameObject Carrier = other.gameObject;
-            int carrierUstundekiUrunSayisi = 0;
-            int carrierUstundekiMaxUrunSayisi = 3;
-    
-            // ona �r�n ver
-            // onda ne kadar �r�n oldu�unu tespit et ve kapasitesi ile olan fark kadar �r�n ver (saniyede 1 �ekilde)
-            
-            for (int i = 0; i < Carrier.transform.childCount; i++)
-            {
-                if (Carrier.transform.GetChild(i).tag == "�r�n")
-                {
-                    carrierUstundekiUrunSayisi++;
-                }
-            }
 
-            if (carrierUstundekiUrunSayisi == carrierUstundekiMaxUrunSayisi)
-            {
-                return;
-            }
-            else
-            {
-                int eklenecekUrunSayisi = carrierUstundekiMaxUrunSayisi - carrierUstundekiUrunSayisi;
-                // eklenecek �r�n say�s� kadar �r�n ekle,
-                // eklenecek �r�n say�s� kadar �r�n� olu�tur.
-                for (int i = 0; i < eklenecekUrunSayisi; i++)
-                {
-                    GameObject urun =  Instantiate(urunPrefab);
-                    urun.transform.parent = null;
-                    urun.transform.position = new Vector3(0, 0, 0);
-                    urun.transform.parent = Carrier.transform;
-                }
-
-            }
-            
-        }
-    }
-    */
 
     [SerializeField] private GameObject PursePrefab;
     [SerializeField] private GameObject WardrobeCanvas;

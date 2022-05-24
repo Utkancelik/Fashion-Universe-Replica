@@ -87,12 +87,11 @@ public class PlayerCollector : MonoBehaviour
     {
         circleSlider.gameObject.SetActive(false);
         purseList.Capacity = maxNumOfItemsHolding;
-
     }
 
     private void Update()
     {
-        
+
     }
 
     public void AddNewItem(Transform _itemToAdd)
@@ -101,7 +100,6 @@ public class PlayerCollector : MonoBehaviour
         _itemToAdd.DOJump(itemHolderTransform.position, 0.5f, 1, 0.5f).OnComplete(
         () =>
         {
-            
             _itemToAdd.SetParent(itemHolderTransform, true);
             _itemToAdd.localPosition = Vector3.zero + new Vector3(purseList.Count * 0.15f, 0, 0);
             purseList.Add(_itemToAdd.gameObject);
@@ -115,31 +113,36 @@ public class PlayerCollector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Reyon") && purseList.Count >0 )
+
+        if (other.CompareTag("Reyon") && purseList.Count > 0)
         {
 
             // get reference to PlayerCollector script to use AddItem function
             Reyon reyonScript;
-            
+
             if (other.TryGetComponent(out reyonScript) && (reyonScript.reyonList.Count < reyonScript.reyonList.Capacity))
             {
-                
+
                 //if number of items holding less than 3
-                if (reyonScript.reyonList.Count < reyonScript.reyonList.Capacity)
+                if ((reyonScript.reyonList.Count < reyonScript.reyonList.Capacity))
                 {
-                    
+
                     // then activate the UI elements
                     for (int i = 0; i < purseList.Count; i++)
                     {
-                        reyonScript.AddNewItem(purseList[i].transform);
-                        purseList.Remove(purseList[i]);
-                     
+                        reyonScript.AddNewItem(purseList[purseList.Count - 1].transform);
+                        purseList.RemoveAt(purseList.Count - 1);
+                        if (reyonScript.reyonList.Count >= reyonScript.reyonList.Capacity)
+                        {
+                            return;
+                        }
                     }
-                    
+
 
                 }
+
                 // if number of items holding is equal to 3
-                
+
 
                 // wardrobe canvas is for checking how many items we hold
                 //transform.GetChild(0).gameObject.SetActive(true);
@@ -149,10 +152,12 @@ public class PlayerCollector : MonoBehaviour
             }
 
         }
+
+
     }
 
 
-    
+
 
 
 

@@ -30,6 +30,7 @@ public class Reyon : MonoBehaviour
             _itemToAdd.localRotation = Quaternion.identity;
             reyonList.Add(_itemToAdd.gameObject);
             numOfItemsHolding++;
+            Debug.Log($"count: {reyonList.Count} cap: {reyonList.Capacity}");
 
         }
         );

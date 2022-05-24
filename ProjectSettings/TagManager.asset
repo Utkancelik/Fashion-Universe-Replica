@@ -7,6 +7,9 @@ TagManager:
   - reyon
   - pursePoint
   - Reyon
+  - Kasa
+  - Door
+  - Customer
   layers:
   - Default
   - TransparentFX
