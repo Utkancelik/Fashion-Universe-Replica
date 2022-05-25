@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject reyonToBeCreated;
     public int customerInField = 0;
+
+    private bool maxCustomerReached = false;
     private void Start()
     {
         exitPoint = GameObject.Find("DoorExitPoint").transform.position;
@@ -23,17 +25,21 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            if (customerInField < 3)
+            if (!maxCustomerReached)
             {
+                yield return new WaitForSeconds(5.0f);
                 GameObject temp = Instantiate(customerPrefab, customerSpawnPoint.position, Quaternion.identity);
                 customerList.Add(temp);
-                CustomerPathfinding.gidiyoMuyum = false;
-                customerInField++;
-                yield return new WaitForSeconds(5.0f);
-            }         
-        }
-        
+                CustomerPathfinding.gidiyoMuyum = false;                
+            }
 
+            yield return null;
+        }   
+    }
+    private void Update()
+    {
+        if (customerList.Count == 3 ) maxCustomerReached = true;
+        else maxCustomerReached = false;        
     }
 
     private void SpawnNewReyon()
@@ -45,8 +51,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        Debug.Log("müþteri sayýsý: " + customerInField);
-    }
+    
 }

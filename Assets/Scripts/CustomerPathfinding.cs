@@ -67,7 +67,7 @@ public class CustomerPathfinding : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Reyon"))
+        if (other.CompareTag("Reyon") && !taken)
         {
             Reyon reyonScript = other.gameObject.GetComponent<Reyon>();
             for (int i = 0; i < reyonScript.reyonList.Count; i++)
@@ -80,6 +80,10 @@ public class CustomerPathfinding : MonoBehaviour
                     taken = true;
                     reyonScript.banaGelenVarMi = false;
                     break;
+                }
+                else
+                {
+                    return;
                 }
             }
 
