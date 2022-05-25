@@ -8,22 +8,28 @@ public class CustomerPathfinding : MonoBehaviour
     private NavMeshAgent agent;
     private bool taken;
     public static bool gidiyoMuyum;
+    private GameManager gameManager;
 
     [SerializeField] private List<Transform> reyonlar = new List<Transform>();
     [SerializeField] private Transform itemHolderTransform;
 
     private void Awake()
     {
-        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Reyon").Length; i++)
-        {
-            reyonlar[i] = GameObject.FindGameObjectsWithTag("Reyon")[i].transform;
-        }
+        agent = GetComponent<NavMeshAgent>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
+
+        reyonlar.Clear();
+        
     }
     void Start()
     {
 
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Reyon").Length; i++)
+        {
+            reyonlar.Add(GameObject.FindGameObjectsWithTag("Reyon")[i].transform);
+        }
 
-        agent = GetComponent<NavMeshAgent>();
 
     }
 
@@ -39,10 +45,10 @@ public class CustomerPathfinding : MonoBehaviour
                 if (reyon != null)
                 {
                     Reyon reyonScript = reyon.GetComponent<Reyon>();
-                    if (reyonScript.reyonList.Count > 0 && !gidiyoMuyum)
+                    if (reyonScript.reyonList.Count > 0 && !reyonScript.banaGelenVarMi)
                     {
                         agent.SetDestination(reyon.transform.position);
-                        gidiyoMuyum = true;
+                        reyonScript.banaGelenVarMi = true;
                     }
                 }
             }
@@ -64,7 +70,7 @@ public class CustomerPathfinding : MonoBehaviour
         if (other.CompareTag("Reyon"))
         {
             Reyon reyonScript = other.gameObject.GetComponent<Reyon>();
-            for (int i = 0; i < reyonScript.reyonList.Capacity; i++)
+            for (int i = 0; i < reyonScript.reyonList.Count; i++)
             {
                 if (reyonScript.reyonList[i] != null)
                 {
@@ -72,6 +78,7 @@ public class CustomerPathfinding : MonoBehaviour
                     reyonScript.reyonList[i].transform.localPosition = Vector3.zero;
                     reyonScript.reyonList.RemoveAt(i);
                     taken = true;
+                    reyonScript.banaGelenVarMi = false;
                     break;
                 }
             }
@@ -90,7 +97,8 @@ public class CustomerPathfinding : MonoBehaviour
         if (other.CompareTag("Door"))
         {
             Destroy(gameObject);
-
+            gameManager.customerInField--;
+            gameManager.customerList.Remove(gameObject);
         }
     }
 

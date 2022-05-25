@@ -13,6 +13,8 @@ public class Reyon : MonoBehaviour
 
     public int numOfItemsHolding = 0;
     public int maxNumOfItemsHolding = 3;
+
+    public bool banaGelenVarMi;
     private void Awake()
     {
         collector = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCollector>();
@@ -30,7 +32,7 @@ public class Reyon : MonoBehaviour
             _itemToAdd.localRotation = Quaternion.identity;
             reyonList.Add(_itemToAdd.gameObject);
             numOfItemsHolding++;
-            Debug.Log($"count: {reyonList.Count} cap: {reyonList.Capacity}");
+            
 
         }
         );

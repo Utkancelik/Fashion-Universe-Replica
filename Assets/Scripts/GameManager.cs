@@ -8,9 +8,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject customerPrefab;
     [HideInInspector] public Vector3 kasaTransform;
     [HideInInspector] public Vector3 exitPoint;
-    private List<GameObject> customerList = new List<GameObject>();
+    public List<GameObject> customerList = new List<GameObject>();
 
     public GameObject reyonToBeCreated;
+    public int customerInField = 0;
     private void Start()
     {
         exitPoint = GameObject.Find("DoorExitPoint").transform.position;
@@ -22,15 +23,14 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            GameObject temp = Instantiate(customerPrefab,customerSpawnPoint.position,Quaternion.identity);        
-            customerList.Add(temp);
-            CustomerPathfinding.gidiyoMuyum = false;
-            if (customerList.Count >= 3)
+            if (customerInField < 3)
             {
-                break;
-            }
-            yield return new WaitForSeconds(12.5f);
-
+                GameObject temp = Instantiate(customerPrefab, customerSpawnPoint.position, Quaternion.identity);
+                customerList.Add(temp);
+                CustomerPathfinding.gidiyoMuyum = false;
+                customerInField++;
+                yield return new WaitForSeconds(5.0f);
+            }         
         }
         
 
@@ -43,5 +43,10 @@ public class GameManager : MonoBehaviour
             CashierPoint.money -= 5;
             reyonToBeCreated.SetActive(true);
         }
+    }
+
+    private void Update()
+    {
+        Debug.Log("müþteri sayýsý: " + customerInField);
     }
 }

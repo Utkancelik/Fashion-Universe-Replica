@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class BuyArea : MonoBehaviour
 {
-    public int cost, currentMoney;
+    public int cost, currentMoney, createdAreaNumber = 1;
     public GameObject reyonPrefab;
     private bool isCreated;
     public Text costText;
-
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && currentMoney > 0)
@@ -21,6 +21,7 @@ public class BuyArea : MonoBehaviour
             {
                 reyonPrefab.SetActive(true);
                 isCreated = true;
+                createdAreaNumber++;
             }
         }
     }
