@@ -120,7 +120,7 @@ public class PlayerCollector : MonoBehaviour
             // get reference to PlayerCollector script to use AddItem function
             Reyon reyonScript;
 
-            if (other.TryGetComponent(out reyonScript) && (reyonScript.reyonList.Count < reyonScript.reyonList.Capacity))
+            if (other.TryGetComponent(out reyonScript))
             {
 
                 //if number of items holding less than 3
@@ -130,12 +130,13 @@ public class PlayerCollector : MonoBehaviour
                     // then activate the UI elements
                     for (int i = 0; i < purseList.Count; i++)
                     {
-                        reyonScript.AddNewItem(purseList[purseList.Count - 1].transform);
-                        purseList.RemoveAt(purseList.Count - 1);
-                        if (reyonScript.reyonList.Count >= reyonScript.reyonList.Capacity)
+                        if (!reyonScript.noMore)
                         {
-                            return;
+                            reyonScript.AddNewItem(purseList[purseList.Count - 1].transform);
+                            purseList.RemoveAt(purseList.Count - 1);
                         }
+                        
+                        
                     }
 
 

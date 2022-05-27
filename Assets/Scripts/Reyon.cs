@@ -14,6 +14,8 @@ public class Reyon : MonoBehaviour
     public int numOfItemsHolding = 0;
     public int maxNumOfItemsHolding = 3;
 
+
+    public bool noMore;
     public bool banaGelenVarMi;
     private void Awake()
     {
@@ -27,16 +29,33 @@ public class Reyon : MonoBehaviour
         () =>
         {
             
-            _itemToAdd.SetParent(itemHolderTransform, true);
-            _itemToAdd.localPosition = Vector3.zero + new Vector3(0, 0, 0.75f * (reyonList.Count));
-            _itemToAdd.localRotation = Quaternion.identity;
-            reyonList.Add(_itemToAdd.gameObject);
-            numOfItemsHolding++;
-            
+            if (!noMore)
+            {
+                reyonList.Add(_itemToAdd.gameObject);
+                _itemToAdd.SetParent(itemHolderTransform, true);
+                _itemToAdd.localPosition = Vector3.zero + new Vector3(0, 0, 0.75f * (reyonList.Count-1));
+                _itemToAdd.localRotation = Quaternion.identity;
+               
+                numOfItemsHolding++;
+
+            }
+
 
         }
         );
 
 
+    }
+
+    private void Update()
+    {
+        if (reyonList.Count == reyonList.Capacity)
+        {
+            noMore = true;
+        }
+        else
+        {
+            noMore = false;
+        }
     }
 }

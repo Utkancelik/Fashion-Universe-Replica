@@ -6,10 +6,10 @@ using UnityEngine.AI;
 public class CustomerPathfinding : MonoBehaviour
 {
     private NavMeshAgent agent;
-    private bool taken;
     public static bool gidiyoMuyum;
     private GameManager gameManager;
 
+    [SerializeField] private bool taken;
     [SerializeField] private List<Transform> reyonlar = new List<Transform>();
     [SerializeField] private Transform itemHolderTransform;
 
@@ -41,14 +41,15 @@ public class CustomerPathfinding : MonoBehaviour
         {
             for (int i = 0; i < reyonlar.Count; i++)
             {
+                int rand = Random.Range(0, reyonlar.Count);
                 GameObject reyon = reyonlar[i].gameObject;
                 if (reyon != null)
                 {
                     Reyon reyonScript = reyon.GetComponent<Reyon>();
                     if (reyonScript.reyonList.Count > 0 && !reyonScript.banaGelenVarMi)
                     {
-                        agent.SetDestination(reyon.transform.position);
                         reyonScript.banaGelenVarMi = true;
+                        agent.SetDestination(reyon.transform.position);
                     }
                 }
             }
@@ -78,7 +79,10 @@ public class CustomerPathfinding : MonoBehaviour
                     reyonScript.reyonList[i].transform.localPosition = Vector3.zero;
                     reyonScript.reyonList.RemoveAt(i);
                     taken = true;
-                    reyonScript.banaGelenVarMi = false;
+                    for (int j = 0; j < reyonlar.Count; j++)
+                    {
+                        GameObject.FindGameObjectsWithTag("Reyon")[j].GetComponent<Reyon>().banaGelenVarMi = false;
+                    }
                     break;
                 }
                 else
