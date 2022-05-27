@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         exitPoint = GameObject.Find("DoorExitPoint").transform.position;
         kasaTransform = GameObject.FindGameObjectWithTag("Kasa").transform.position;
         
-        StartCoroutine(SpawnCustomer());
+        //StartCoroutine(SpawnCustomer());
     }
     IEnumerator SpawnCustomer()
     {

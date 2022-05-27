@@ -35,7 +35,10 @@ public class Reyon : MonoBehaviour
                 _itemToAdd.SetParent(itemHolderTransform, true);
                 _itemToAdd.localPosition = Vector3.zero + new Vector3(0, 0, 0.75f * (reyonList.Count-1));
                 _itemToAdd.localRotation = Quaternion.identity;
-               
+                if (reyonList.Count >= reyonList.Capacity)
+                {
+                    noMore = true;
+                }
                 numOfItemsHolding++;
 
             }

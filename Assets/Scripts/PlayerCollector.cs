@@ -128,12 +128,20 @@ public class PlayerCollector : MonoBehaviour
                 {
 
                     // then activate the UI elements
-                    for (int i = 0; i < purseList.Count; i++)
+                    for (int i = 0; i < reyonScript.reyonList.Capacity - reyonScript.reyonList.Count; i++)
                     {
                         if (!reyonScript.noMore)
                         {
+                            Debug.Log("çantadaki obje sayýsý: " + purseList.Count);
                             reyonScript.AddNewItem(purseList[purseList.Count - 1].transform);
                             purseList.RemoveAt(purseList.Count - 1);
+
+                            if (purseList.Count == 0)
+                            {
+                                reyonScript.noMore = true;
+                            }
+                            
+                            
                         }
                         
                         
